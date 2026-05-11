@@ -26,7 +26,7 @@ from fastapi.security import HTTPAuthorizationCredentials
 from pydantic import ValidationError
 from starlette.requests import Request
 from starlette.responses import Response
-from starlette.types import ASGIApp, Message
+from starlette.types import ASGIApp
 
 CORS_ALLOW_ORIGINS = os.environ.get("CORS_ALLOW_ORIGINS", "*")
 PUBLISHED_API_ID = os.environ.get("PUBLISHED_API_ID", None)
@@ -133,10 +133,8 @@ def add_current_user_to_request(request: Request, call_next: ASGIApp):
 async def add_log_requests(request: Request, call_next: ASGIApp):
     logger.info(f"Request path: {request.url.path}")
     logger.info(f"Request method: {request.method}")
-    logger.info(f"Request headers: {request.headers}")
-
-    body = await request.body()
-    logger.info(f"Request body: {body.decode('utf-8')[:100]}...")
+    safe_headers = {k: v for k, v in request.headers.items() if k.lower() != "authorization"}
+    logger.info(f"Request headers: {safe_headers}")
 
     response = await call_next(request)  # type: ignore
 
