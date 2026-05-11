@@ -52,7 +52,7 @@
     "@aws-cdk/aws-autoscaling:generateLaunchTemplateInsteadOfLaunchConfig": true,
     "@aws-cdk/core:includePrefixInUniqueNameGeneration": true,
     "@aws-cdk/aws-opensearchservice:enableOpensearchMultiAzWithStandby": true,
-    "bedrockRegion": "us-east-1",
+    "bedrockRegion": "eu-west-2",
     "enableFrontendIpv6": true,
     "enableFrontendWaf": true,
     "allowedIpV4AddressRanges": ["0.0.0.0/1", "128.0.0.0/1"],
@@ -71,14 +71,16 @@
       "0000:0000:0000:0000:0000:0000:0000:0000/1",
       "8000:0000:0000:0000:0000:0000:0000:0000/1"
     ],
-    "enableRagReplicas": true,
+    "enableRagReplicas": false,
     "enableBedrockGlobalInference": true,
     "enableBedrockCrossRegionInference": true,
-    "enableLambdaSnapStart": true,
+    "enableLambdaSnapStart": false,
     "enableBotStore": true,
     "enableBotStoreReplicas": false,
     "botStoreLanguage": "en",
-    "globalAvailableModels": [],
+    "globalAvailableModels": [
+      "amazon-nova-lite"
+    ],
     "tokenValidMinutes": 30,
     "alternateDomainName": "",
     "hostedZoneId": "",
